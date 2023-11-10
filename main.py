@@ -113,11 +113,10 @@ def get_time():
 if __name__ == '__main__':
     file_fai = open('Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai')
     file_fa = open('Homo_sapiens.GRCh38.dna.primary_assembly.fa')
-    count = 0
     
-    get_time()
-    # G, T, A, C = get_lines(0, 170*60, 10)
-    # print(G)
-    # print(T)
-    # print(A)
-    # print(C)
+    # get_time()
+    G, T, A, C = get_lines(0, 170*60, 111)
+    print(G)
+    print(T)
+    print(A)
+    print(C)
