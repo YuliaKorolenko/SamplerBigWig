@@ -4,8 +4,8 @@ from dataclasses import dataclass
 import math
 import pandas as pd
 
-PREPROCESS_FILE = "DNA"
-PREPROCESS_METADATA = "metadata.csv"
+PREPROCESS_FILE = "less_memory/DNA"
+PREPROCESS_METADATA = "less_memory/metadata.csv"
 BYTE_SIZE = 8
 
 # Словарь для сопоставления символов с битовым представлением
