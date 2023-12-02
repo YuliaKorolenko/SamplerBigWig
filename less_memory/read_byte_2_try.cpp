@@ -91,7 +91,7 @@ void get_time() {
     
     std::clock_t start_time = std::clock();
     for (int j = 0; j < 1000; j++) {
-      int chr = std::rand() % 23;
+      int chr = 0;
       int start_pos = std::rand() % 2000000;
       std::vector<int> result = get_lines(chr, start_pos);
     }

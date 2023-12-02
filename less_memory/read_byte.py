@@ -63,7 +63,6 @@ class Count:
         return self
     
     def __next__(self):
-        start_time_ = time.time()
         first_bit = self.byte & self.bit_mapping[self.get_next_pos()] != 0
         second_bit = self.byte & self.bit_mapping[self.get_next_pos()] != 0
         third_bit = self.byte & self.bit_mapping[self.get_next_pos()] != 0
