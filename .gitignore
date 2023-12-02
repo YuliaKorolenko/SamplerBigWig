@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai
+/less_memory/DNA
+/less_memory/metadata.csv
+.idea/
+.DS_Store
+.vscode/

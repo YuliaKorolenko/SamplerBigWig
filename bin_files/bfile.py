@@ -32,6 +32,7 @@ def get_time():
         start_time = time.time()
         for _ in range(0, 10000):
             start_pos = random.randint(0, 20000000)
+            chr = random.randint(0, 2)
             ans = get_lines(0, start_pos)
         
         res_time = time.time() - start_time
@@ -44,8 +45,8 @@ def get_time():
     plt.show()
 
 if __name__ == '__main__':    
-    get_time()
-    # print(get_lines(0, 0))
+    # get_time()
+    print(get_lines(0, 0))
 
 
 

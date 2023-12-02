@@ -1,5 +1,7 @@
 # SamplerBigWig
 
-main.py - simple reader
+less_memory там, где разными способами пробую считывать с файла в который записываю в битах. Есть свой preprocess. Надо запустить перед использованием.
 
-less_memory.py - before start, run preprocess.py
+bin_files - тут попытка записывать 4 one_hot вектора в binary file и работа с ними. Но DNA тогда получается размером 38gb. Тоже есть свой preprocess
+
+main - работа c обычным HOMO_sapiens....
