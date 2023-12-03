@@ -11,11 +11,11 @@ h5_file = h5py.File(hdf5_file, 'w')
 
 j = 0
 for chromosome, size in chromosomes.items():
-    if j == 10:
-        break
+    # if (chromosome == "chrY" or chromosome == "chrX" or int(chromosome[3:]) > 10):
+    #     continue
     values = bw_file.values(chromosome, 0, size)
-    group = h5_file.create_group(chromosome)
-    group.create_dataset('values', data=values)
+    print(chromosome)
+    group = h5_file.create_dataset(chromosome, data=values)
     j += 1
     
 bw_file.close()
