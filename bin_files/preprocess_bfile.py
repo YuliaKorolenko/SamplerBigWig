@@ -58,6 +58,8 @@ def to_one_hot(lines : str, cur_size : int):
             A[j] = 1
         elif (i == 'C'):
             C[j] = 1
+        elif (i != 'N'):
+            continue
         j += 1
     return G, T, A, C
 
@@ -73,7 +75,7 @@ def preprocess_dna():
     ans_C = []
 
     j = 0
-    for i in tqdm(range(0, 24)):
+    for i in tqdm(range(0, 3)):
         file_fa.seek(start_chr_positions[i].start_pos)
         line = file_fa.read(start_chr_positions[i].wit_sep_lenght - 1)
 

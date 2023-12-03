@@ -11,8 +11,7 @@ import numpy as np
 # 011 - G
 # 100 - N
 
-PREPROCESS_FILE = "hdf5/DNA_hdf5_4"
-PREPROCESS_METADATA = "hdf5/hdf5_metadata_4.csv"
+PREPROCESS_METADATA = "numpy_arr/numpy_metadata.csv"
 
 @dataclass
 class Chromosome_Info:
@@ -75,28 +74,30 @@ def preprocess_dna():
     ans_C = []
 
     j = 0
-    for i in tqdm(range(0, 3)):
+    for i in tqdm(range(0, 10)):
         file_fa.seek(start_chr_positions[i].start_pos)
         line = file_fa.read(start_chr_positions[i].wit_sep_lenght - 1)
 
-        G, T, A, C = to_one_hot(line, start_chr_positions[i].wit_sep_lenght - 1)
+        print(len(line))
+        print(start_chr_positions[i].lenght + 1)
+        G, T, A, C = to_one_hot(line, start_chr_positions[i].lenght + 1)
         ans_G += G
         ans_T += T
         ans_A += A
         ans_C += C
 
-        df.loc[i] = [j, start_chr_positions[i].wit_sep_lenght - 1]
-        j += start_chr_positions[i].wit_sep_lenght - 1
+        df.loc[i] = [j, start_chr_positions[i].lenght]
+        j += start_chr_positions[i].lenght
         df.to_csv(PREPROCESS_METADATA, index=False)
 
-    print("before save")    
-    with h5py.File(PREPROCESS_FILE, 'w') as file:
-        file.create_dataset('G', data=ans_G)
-        file.create_dataset('T', data=ans_T)
-        file.create_dataset('A', data=ans_A)
-        file.create_dataset('C', data=ans_C)
+    print("before save")   
+    np.save('numpy_arr/A', ans_A)
+    np.save('numpy_arr/C', ans_C)
+    np.save('numpy_arr/G', ans_G)
+    np.save('numpy_arr/T', ans_T) 
     print("after save")
 
 
+# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     preprocess_dna()

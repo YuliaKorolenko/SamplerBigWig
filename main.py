@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import math
 import random
 import matplotlib.pyplot as plt
+from less_memory import get_lines_1
 
 
 @dataclass
@@ -68,6 +69,8 @@ def to_one_hot(lines : str, WINDOW_SIZE : int):
             A[j] = 1
         elif (i == 'C'):
             C[j] = 1
+        elif (i != 'N'):
+            continue
         j += 1
     return G, T, A, C
 
