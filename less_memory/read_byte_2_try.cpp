@@ -7,8 +7,6 @@ using namespace std;
 
 std::ifstream inputFile;
 int BYTE_SIZE = 8;
-int WINDOW_SIZE = 10;
-int NORM_WINDOW_SIZE = std::ceil(WINDOW_SIZE  * 3 / BYTE_SIZE) + 1;
 
 struct Data {
     int start;
@@ -27,7 +25,7 @@ int get_next(int &cur_pos_in_byte, int &byte_num){
     return cur_pos_in_byte - 1;
 }
 
-vector<int> get_one_hot(int start, int start_in_byte){
+vector<int> get_one_hot(int start, int start_in_byte, int WINDOW_SIZE){
     std::ifstream inputFile("less_memory/DNA", std::ios::binary);
 
     // if (!inputFile) {
@@ -35,6 +33,7 @@ vector<int> get_one_hot(int start, int start_in_byte){
     //     return T;
     // }
 
+    int NORM_WINDOW_SIZE = std::ceil(WINDOW_SIZE  * 3 / BYTE_SIZE) + 1;
     int byte_num = 0;
     int cur_pos_in_byte = 0;
     char buffer[NORM_WINDOW_SIZE];
@@ -75,9 +74,9 @@ vector<int> get_one_hot(int start, int start_in_byte){
     return T;
 }
 
-vector<int> get_lines(int chr, int start) {
+vector<int> get_lines(int chr, int start, int WINDOW_SIZE) {
     // assert(start + WINDOW_SIZE <= (df.loc[chr].byte_count * 8 - df.loc[chr].waste_bits) / 3, "Make the starting position smaller or choose a different chromosome");
-    return get_one_hot(metadata[chr].start + std::ceil(start * 3.0 / BYTE_SIZE), start * 3 % BYTE_SIZE);
+    return get_one_hot(metadata[chr].start + std::ceil(start * 3.0 / BYTE_SIZE), start * 3 % BYTE_SIZE, WINDOW_SIZE);
 }
 
 void get_time() {
@@ -85,15 +84,15 @@ void get_time() {
   std::vector<int> sizes;
   
   for (int i = 1; i < 11; i++) {
-    WINDOW_SIZE = 100000 * i;
+    int WINDOW_SIZE = 100000 * i;
     std::cout << "Window size: " << WINDOW_SIZE << endl;
-    NORM_WINDOW_SIZE = std::ceil(WINDOW_SIZE * 3.0 / BYTE_SIZE);
+    int NORM_WINDOW_SIZE = std::ceil(WINDOW_SIZE * 3.0 / BYTE_SIZE);
     
     std::clock_t start_time = std::clock();
     for (int j = 0; j < 1000; j++) {
       int chr = 0;
       int start_pos = std::rand() % 2000000;
-      std::vector<int> result = get_lines(chr, start_pos);
+      std::vector<int> result = get_lines(chr, start_pos, WINDOW_SIZE);
     }
     
     double res_time = (std::clock() - start_time) / (double)CLOCKS_PER_SEC;

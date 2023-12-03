@@ -6,20 +6,20 @@
 import numpy as np
 from dataclasses import dataclass
 import math
-import time
 import pandas as pd
-import random
 import matplotlib.pyplot as plt
 
 PREPROCESS_FILE = "less_memory/DNA"
 PREPROCESS_METADATA = "less_memory/metadata.csv"
 BYTE_SIZE = 8
-WINDOW_SIZE = 100
-NORM_WINDOW_SIZE = math.ceil(WINDOW_SIZE  * 3 / BYTE_SIZE)
 df = pd.read_csv(PREPROCESS_METADATA)
 
 
-def get_lines(chr : int, start : int):
+def get_lines(chr : int, start : int, WINDOW_SIZE_ : int):
+    global WINDOW_SIZE 
+    global NORM_WINDOW_SIZE
+    WINDOW_SIZE = WINDOW_SIZE_
+    NORM_WINDOW_SIZE = math.ceil(WINDOW_SIZE  * 3 / BYTE_SIZE)
     assert start + WINDOW_SIZE  <= (df.loc[chr].byte_count * 8 - df.loc[chr].waste_bits) // 3 , 'Make the starting position smaller or choose a different chromosome'
     return bits_to_one_hot(df.loc[chr].start + math.ceil(start * 3 / BYTE_SIZE), start * 3 % BYTE_SIZE) 
 
@@ -59,34 +59,9 @@ def bits_to_one_hot(start, start_in_byte):
 
     return G, T, A, C
 
-def get_time():
-    global WINDOW_SIZE 
-    global NORM_WINDOW_SIZE
-    times = []
-    sizes = []
-    for i in range(1, 10):
-        WINDOW_SIZE = 1000 * i
-        NORM_WINDOW_SIZE = math.ceil(WINDOW_SIZE  * 3 / BYTE_SIZE)
-        print("WINDOW SIZE", WINDOW_SIZE)
-        start_time = time.time()
-        for _ in range(0, 10000):
-            chr = random.randint(0, 4)
-            start_pos = random.randint(0, 20000000)
-            G, T, A, C = get_lines(chr, start_pos)
-        
-        res_time = time.time() - start_time
-        times.append(res_time)
-        sizes.append(WINDOW_SIZE)
-        print("--- %s seconds ---" % res_time)
-    plt.xlabel('Time in seconds')
-    plt.ylabel('Window size')    
-    plt.plot(times, sizes,'ro')
-    plt.show()
-
 if __name__ == '__main__':
-    get_time()
-    # G, T, A, C = get_lines(0, 0)
-    # print(G)
-    # print(T)
-    # print(A)
-    # print(C)
+    G, T, A, C = get_lines(0, 0, 10)
+    print(G)
+    print(T)
+    print(A)
+    print(C)
