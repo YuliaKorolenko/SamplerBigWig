@@ -1,12 +1,9 @@
-import numpy as np
-import time
 import pandas as pd
-import random
 import matplotlib.pyplot as plt
 import h5py
 
-PREPROCESS_FILE = "hdf5/DNA_hdf5_4"
-PREPROCESS_METADATA = "hdf5/hdf5_metadata_4.csv"
+PREPROCESS_FILE = "hdf5/DNA_hdf5"
+PREPROCESS_METADATA = "hdf5/hdf5_metadata.csv"
 LOADED_HDF5 = h5py.File(PREPROCESS_FILE, 'r')
 A = LOADED_HDF5['A']
 C = LOADED_HDF5['C']

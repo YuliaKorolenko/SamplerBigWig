@@ -11,8 +11,8 @@ import numpy as np
 # 011 - G
 # 100 - N
 
-PREPROCESS_FILE = "hdf5/DNA_hdf5_4"
-PREPROCESS_METADATA = "hdf5/hdf5_metadata_4.csv"
+PREPROCESS_FILE = "hdf5/DNA_hdf5"
+PREPROCESS_METADATA = "hdf5/hdf5_metadata.csv"
 
 @dataclass
 class Chromosome_Info:
@@ -75,7 +75,7 @@ def preprocess_dna():
     ans_C = []
 
     j = 0
-    for i in tqdm(range(0, 3)):
+    for i in tqdm(range(0, 24)):
         file_fa.seek(start_chr_positions[i].start_pos)
         line = file_fa.read(start_chr_positions[i].wit_sep_lenght - 1)
 

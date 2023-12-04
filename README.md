@@ -8,3 +8,12 @@ main - работа c обычным HOMO_sapiens....
 
 numpy_arr - сохранение 4 numpy array. Если переводить 10 хромосом, то каждый из 4 numpy array займет 13 gb
 ![Alt text](image.png)
+
+## DNA
+
+| Tool        | hdf5    | #2    |
+| :---:       | :---:   | :---: |
+| Size in GB  | 93.57   | 283   |
+| :---:       | :---:   | :---: |
+| Time in min | 94      | 283   |
+16:07 - 3 хром

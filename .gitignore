@@ -16,8 +16,8 @@
 .DS_Store
 .vscode/
 
-/hdf5/DNA_hdf5_4
-/hdf5/hdf5_metadata_4.csv
+/hdf5/DNA_hdf5
+/hdf5/hdf5_metadata.csv
 
 /big_wig/bigwig.hdf5
 
