@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-PREPROCESS_FILE = "bin_files/DNA_bfile_4"
-PREPROCESS_METADATA = "bin_files/bfile_metadata_4.csv"
+PREPROCESS_FILE = "bin_files/DNA_bfile"
+PREPROCESS_METADATA = "bin_files/bfile_metadata.csv"
 LOADED_BIN = np.load(PREPROCESS_FILE)
 df = pd.read_csv(PREPROCESS_METADATA)
 
@@ -17,7 +17,8 @@ def get_lines(chr : int, start : int, WINDOW_SIZE : int):
 
 if __name__ == '__main__':    
     # get_time()
-    print(get_lines(0, 0, 100))
+    for i in range(0, 24):
+        print(get_lines(0, 0, 100))
 
 
 
