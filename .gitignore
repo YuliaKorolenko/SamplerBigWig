@@ -29,3 +29,9 @@
 
 /bin_files/bfile_metadata_4.csv
 /bin_files/DNA_bfile_4
+
+/bin_array/A
+/bin_array/C
+/bin_array/G
+/bin_array/T
+/bin_array/bin_metadata.csv

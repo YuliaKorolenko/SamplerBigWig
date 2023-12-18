@@ -11,10 +11,10 @@ numpy_arr - сохранение 4 numpy array. Если переводить 10
 
 ## DNA
 
-| Tool        | hdf5    | bin file | numpy_arr |
-| :---:       | :---:   | :---:    |  :---:    |
-| Size in GB  | 93.57   | 93.57    |   92.4    |
-| Time in min | 94      |   -      |   40      |
+| Tool        | hdf5    | bin file | numpy_arr | bittaray
+| :---:       | :---:   | :---:    |  :---:    | :---:   
+| Size in GB  | 93.57   | 93.57    |   92.4    | 1.5
+| Time in min | 94      |   -      |   40      | 20
 
 
 PS. пробовала сохранять массив букв в numpy.arr, для 3 хромосом получилось 82 gb

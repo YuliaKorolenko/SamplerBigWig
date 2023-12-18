@@ -1,9 +1,10 @@
-import h5py
+from bitarray import bitarray
 from dataclasses import dataclass
 from tqdm import tqdm
 import pandas as pd
 import math
 import numpy as np
+import os
 
 # 000 - T
 # 001 - C
@@ -11,8 +12,12 @@ import numpy as np
 # 011 - G
 # 100 - N
 
-PREPROCESS_FILE = "hdf5/DNA_hdf5"
-PREPROCESS_METADATA = "hdf5/hdf5_metadata.csv"
+
+A_FILE = "bin_array/A"
+C_FILE = "bin_array/C"
+G_FILE = "bin_array/G"
+T_FILE = "bin_array/T"
+PREPROCESS_METADATA = "bin_array/bin_metadata.csv"
 
 @dataclass
 class Chromosome_Info:
@@ -65,37 +70,55 @@ def to_one_hot(lines : str, cur_size : int):
     return G, T, A, C
 
 def preprocess_dna():
+    bitarray_empty = bitarray()
+
+    with open(A_FILE, 'wb') as file1:
+        bitarray_empty.tofile(file1)
+
+    with open(C_FILE, 'wb') as file2:
+        bitarray_empty.tofile(file2)
+
+    with open(G_FILE, 'wb') as file3:
+        bitarray_empty.tofile(file3)
+        
+    with open(T_FILE, 'wb') as file4:
+        bitarray_empty.tofile(file4)
+
     df = pd.DataFrame(columns=['start', 'lenght'])
     file_fa = open('Homo_sapiens.GRCh38.dna.primary_assembly.fa')
     start_chr_positions = get_positions()
-     
-    ans_G = []
-    ans_T = []
-    ans_A = []
-    ans_C = []
 
     j = 0
-    for i in tqdm(range(0, 2)):
+    for i in tqdm(range(0, 24)):
         file_fa.seek(start_chr_positions[i].start_pos)
         line = file_fa.read(start_chr_positions[i].wit_sep_lenght - 1)
 
         G, T, A, C = to_one_hot(line, start_chr_positions[i].wit_sep_lenght - 1)
-        ans_G += G
-        ans_T += T
-        ans_A += A
-        ans_C += C
 
         df.loc[i] = [j, start_chr_positions[i].wit_sep_lenght - 1]
         j += start_chr_positions[i].wit_sep_lenght - 1
         df.to_csv(PREPROCESS_METADATA, index=False)
 
-    print("before save")    
-    with h5py.File(PREPROCESS_FILE, 'w') as file:
-        file.create_dataset('G', data=ans_G)
-        file.create_dataset('T', data=ans_T)
-        file.create_dataset('A', data=ans_A)
-        file.create_dataset('C', data=ans_C)
-    print("after save")
+        file_size = os.path.getsize(A_FILE)
+        ans_A = bitarray(A)
+        with open(A_FILE, 'r+b') as file:
+            file.seek(file_size)
+            ans_A.tofile(file) 
+
+        ans_C = bitarray(C)
+        with open(C_FILE, 'r+b') as file:
+            file.seek(file_size)
+            ans_C.tofile(file) 
+
+        ans_G = bitarray(G)
+        with open(G_FILE, 'r+b') as file:
+            file.seek(file_size)
+            ans_G.tofile(file) 
+
+        ans_T = bitarray(T)
+        with open(T_FILE, 'r+b') as file:
+            file.seek(file_size)
+            ans_T.tofile(file) 
 
 
 if __name__ == '__main__':
