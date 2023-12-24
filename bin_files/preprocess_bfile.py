@@ -75,7 +75,7 @@ def preprocess_dna():
     ans_C = []
 
     j = 0
-    for i in tqdm(range(0, 12)):
+    for i in tqdm(range(0, 24)):
         file_fa.seek(start_chr_positions[i].start_pos)
         line = file_fa.read(start_chr_positions[i].wit_sep_lenght - 1)
 

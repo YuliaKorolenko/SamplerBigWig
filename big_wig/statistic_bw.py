@@ -2,6 +2,7 @@ import pyBigWig
 import math
 import pandas as pd
 from dataclasses import dataclass
+import matplotlib.pyplot as plt
 
 bigwig_file = 'interval.all.obs.bw'
 bigwig = pyBigWig.open(bigwig_file)
@@ -44,20 +45,39 @@ NUMBER_IN_LINE = 60
 if __name__ == '__main__':
     start_chr_positions = get_positions()
 
-    for i in range(0, 22):
+    ans = []
+    all_numbers = 0
+
+    Ysize = 1000000
+
+    for i in range(0, 1):
         chr_num = 'chr%s' % (i + 1)
         print(chr_num)
         values = bigwig.values(chr_num, 0, start_chr_positions[i].lenght)
         j = 0
         i = 0
         k = 0
+        cur = 0
+
         for value in values:
+            all_numbers += 1
             if not math.isnan(value):
                 i += 1
+                cur += 1
             else :
                 k += 1
             j += 1
+            if (all_numbers % Ysize == 0):
+                print(cur)
+                ans.append(cur)
+                cur = 0
 
-        # print("not null ", i)
-        # print("null ", k)
         print("percent", i * 100 / j)
+
+    x = [i*Ysize for i in range(0, len(ans))]
+    print(x)
+    plt.plot(x, ans)
+    plt.ylim(0, 1000000)
+    plt.show()
+
+    print("все значения", all_numbers)

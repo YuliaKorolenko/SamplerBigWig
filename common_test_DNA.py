@@ -8,7 +8,8 @@ from numpy_arr import get_lines_6
 from main import get_lines as get_lines_7
 from bin_array import get_lines_8
 
-functions = [get_lines_4, get_lines_5, get_lines_6, get_lines_7, get_lines_8]
+functions = [get_lines_4, get_lines_5, get_lines_6, get_lines_8, get_lines_7]
+# functions = [get_lines_4, get_lines_8, get_lines_7]
 
 def get_time():
     global WINDOW_SIZE 
@@ -23,7 +24,7 @@ def get_time():
             start_time = time.time()
             for _ in range(0, 1000):
                 start_pos = random.randint(0, 20000000)
-                chr = random.randint(0, 1)
+                chr = random.randint(0, 23)
                 ans = fun(chr, start_pos, WINDOW_SIZE)
         
             res_time = time.time() - start_time
@@ -39,9 +40,9 @@ def get_time():
     # plt.plot(sizes, times[1], color='purple', label='less memory 2 try')
     plt.plot(sizes, times[0], color="#F72585", label='hdf5')
     plt.plot(sizes, times[1], color="#7209B7", label='bin files')
-    plt.plot(sizes, times[2], color="#4361EE", label='numpy arr')
-    plt.plot(sizes, times[3], color="#4CC9F0", label='simple')
-    plt.plot(sizes, times[4], color='#4361EE', label='bin files')
+    plt.plot(sizes, times[2], color="black", label='numpy arr')
+    plt.plot(sizes, times[3], color="#4CC9F0", label='bin files')
+    plt.plot(sizes, times[4], color='#4361EE', label='simple')
     plt.legend()
     plt.show()
 

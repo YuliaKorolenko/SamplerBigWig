@@ -90,28 +90,6 @@ def get_lines(chr_number : int, start_pos : int, WINDOW_SIZE : int):
 
 
 
-def get_time():
-    times = []
-    sizes = []
-    for i in range(1, 10):
-        WINDOW_SIZE = 1000 * i
-        start_time = time.time()
-        for _ in range(0, 10000):
-            chr = random.randint(0, 23)
-            start_pos = random.randint(0, 20000000)
-            G, T, A, C = get_lines(chr, start_pos, WINDOW_SIZE)
-        
-        res_time = time.time() - start_time
-        times.append(res_time)
-        sizes.append(WINDOW_SIZE)
-        print("--- %s seconds ---" % res_time)
-    plt.xlabel('Time in seconds')
-    plt.ylabel('Window size')    
-    plt.plot(times, sizes,'ro')
-    plt.show()
-
-
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     file_fai = open('Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai')
