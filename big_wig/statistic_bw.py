@@ -61,7 +61,10 @@ if __name__ == '__main__':
 
         for value in values:
             all_numbers += 1
+            if (all_numbers == 180790):
+                break
             if not math.isnan(value):
+                print(all_numbers)
                 i += 1
                 cur += 1
             else :

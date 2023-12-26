@@ -19,8 +19,6 @@
 /hdf5/DNA_hdf5
 /hdf5/hdf5_metadata.csv
 
-/big_wig/bigwig.hdf5
-
 /numpy_arr/A.npy
 /numpy_arr/C.npy
 /numpy_arr/G.npy
@@ -35,3 +33,9 @@
 /bin_array/G
 /bin_array/T
 /bin_array/bin_metadata.csv
+
+/big_wig/__pycache__/
+/big_wig/bigwig.hdf5
+
+/big_wig_hash_map/__pycache__
+/big_wig_hash_map/data_map.txt
