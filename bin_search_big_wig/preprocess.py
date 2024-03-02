@@ -1,45 +1,57 @@
 import pyBigWig
 import math
 import numpy as np
+import os
 
 # you can select any value from the segment -> [1...24]
-size_of_bw = 24
+size_of_bw = 2
 
 # Открываем bigWig файл для чтения
-bw = pyBigWig.open("interval.all.obs.bw")
+bw_folder = "foldbigwig"
+output_folder = "bnbigwig"
+
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
 def preprocess():
-    # Получаем размер bigWig файла
-    positions = []
-    values_ziped = []
+    for filename in os.listdir(bw_folder):
+        if filename.endswith(".bw"):
+            bw_path = os.path.join(bw_folder, filename)
+            output_path = os.path.join(output_folder, filename.replace(".bw", "_data"))
 
-    j = 0
-    for i in range(1, size_of_bw):
-        chr = "chr"
-        if i == 23:
-            chr += "X"
-        elif i == 24:
-            chr += "Y"
-        else:
-            chr += str(i)
-        print(chr)
+            bw = pyBigWig.open(bw_path)
+            positions = []
+            values_ziped = []
 
-        # Получаем размер хромосомы
-        chrom_size = bw.chroms(chr)
-        print("chrom_size ", chrom_size)
-        print("j ", j)
+            j = 0
+            for i in range(1, size_of_bw):
+                chr = "chr"
+                if i == 23:
+                    chr += "X"
+                elif i == 24:
+                    chr += "Y"
+                else:
+                    chr += str(i)
+                print(chr)
 
-        values = bw.values(chr, 0, chrom_size)
+                # Получаем размер хромосомы
+                chrom_size = bw.chroms(chr)
+                print("chrom_size ", chrom_size)
+                print("j ", j)
 
-        for pos, value in enumerate(values, start=1):
-            if not math.isnan(value):
-                positions.append(pos + j)
-                values_ziped.append(value)
-                
-        j += chrom_size
-    
-    np.save('bin_search_big_wig/positions', np.array(positions, dtype=np.int64))
-    np.save('bin_search_big_wig/values_ziped', np.array(values_ziped, dtype=np.int64))
+                values = bw.values(chr, 0, chrom_size)
+
+                for pos, value in enumerate(values, start=1):
+                    if not math.isnan(value):
+                        positions.append(pos + j)
+                        values_ziped.append(value)
+                        
+                j += chrom_size
+            
+            np.save(output_path + '_positions.npy', np.array(positions, dtype=np.int64))
+            np.save(output_path + '_values.npy', np.array(values_ziped, dtype=np.int64))
+            
+            bw.close()
 
 if __name__ == '__main__':
     preprocess()

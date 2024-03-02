@@ -39,3 +39,9 @@
 
 /big_wig_hash_map/__pycache__
 /big_wig_hash_map/data_map.txt
+
+/resfoldbigwig
+/hdf5bigwig
+/foldbigwig
+
+bin_search_big_wig/__pycache__

@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     Ysize = 1000000
 
-    for i in range(0, 1):
+    for i in range(2, 3):
         chr_num = 'chr%s' % (i + 1)
         print(chr_num)
         values = bigwig.values(chr_num, 0, start_chr_positions[i].lenght)
@@ -61,8 +61,6 @@ if __name__ == '__main__':
 
         for value in values:
             all_numbers += 1
-            if (all_numbers == 180790):
-                break
             if not math.isnan(value):
                 print(all_numbers)
                 i += 1

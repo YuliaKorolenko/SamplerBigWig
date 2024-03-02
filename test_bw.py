@@ -21,7 +21,7 @@ def get_time():
             start_time = time.time()
             for _ in range(0, 1000):
                 start_pos = random.randint(0, 20000000)
-                chr = random.randint(0, 23)
+                chr = random.randint(0, 1)
                 ans = fun(chr, start_pos, WINDOW_SIZE)
         
             res_time = time.time() - start_time
@@ -33,13 +33,10 @@ def get_time():
     plt.ylabel('Time in seconds')
     plt.xlabel('Window size') 
     print(sizes)
-    # plt.plot(sizes, times[0], color='black', label='less memory')
-    # plt.plot(sizes, times[1], color='purple', label='less memory 2 try')
     plt.plot(sizes, times[0], color="#F72585", label='hdf5')
     plt.plot(sizes, times[1], color="#7209B7", label='bw')
     plt.plot(sizes, times[2], color="black", label='hash map')
     plt.plot(sizes, times[3], color="#4CC9F0", label='bin search')
-    # plt.plot(sizes, times[4], color='#4361EE', label='simple')
     plt.legend()
     plt.show()
 
