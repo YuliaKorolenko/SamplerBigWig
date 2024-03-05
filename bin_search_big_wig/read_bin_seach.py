@@ -8,6 +8,7 @@ import os
 
 PREPROCESS_METADATA = "bin_array/bin_metadata.csv"
 df = pd.read_csv(PREPROCESS_METADATA)
+output_path = "bnbigwig"
 
 def preprocess_all_data(folder_path):
     all_positions = []
@@ -23,7 +24,7 @@ def preprocess_all_data(folder_path):
     return all_positions, all_values_ziped
 
 # Preprocess all numpy arrays
-all_positions, all_values_ziped = preprocess_all_data("bnbigwig")
+all_positions, all_values_ziped = preprocess_all_data(output_path)
 
 def get_lines(chr : int, start : int, WINDOW_SIZE : int):
     ans_all = []

@@ -6,15 +6,13 @@ PREPROCESS_METADATA = "bin_array/bin_metadata.csv"
 df = pd.read_csv(PREPROCESS_METADATA)
 
 def read_bw():
-    print("read_bw")
     data_vector = []
-    folder_path = "resfoldbigwig"
+    folder_path = "hashmapfold"
 
     for filename in os.listdir(folder_path):
         data_map = {}
         
         file_path = os.path.join(folder_path, filename)
-        print(file_path)
         with open(file_path, "r") as file:
             for line in file:
                 key, value = line.strip().split("\t")

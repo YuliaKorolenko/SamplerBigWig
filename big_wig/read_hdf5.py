@@ -33,7 +33,7 @@ def get_vector(i, start, WINDOW_SIZE, hdf5_file):
 
 
 if __name__ == '__main__':
-    print(get_h5_vector(1, 53533, 1000))
+    print(get_h5_vector(0, 53533, 10))
 
     # # Открываем файл HDF5 для чтения данных
     # hdf5_file = h5py.File('big_wig/bigwig.hdf5', 'r')

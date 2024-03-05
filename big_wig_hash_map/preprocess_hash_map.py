@@ -1,31 +1,36 @@
 import pyBigWig
 import math
 import os
+import sys
 
-# you can select any value from the segment -> [1...24]
-size_of_bw = 3
+# you can select any value from the segment -> [1...24], max - 24
+size_of_bw = 1
 
-folder_path = "foldbigwig"
-res_folder_path = "resfoldbigwig"
-files_list = []
+file_path = "file_paths.txt"
+res_folder_path = "hashmapfold"
 
 def prerpocess_all():
-    if os.path.exists(folder_path) and os.path.isdir(folder_path):
-        files_list = os.listdir(folder_path)
-        i = 0
-        for file in files_list:
-            print(os.path.join(folder_path, file))
-            preprocess_bw(os.path.join(folder_path, file), i)
-            i += 1
+    if not os.path.exists(res_folder_path):
+        os.makedirs(res_folder_path)
+    file_paths = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            file_paths.append(line.strip())
+    i = 0        
+    for file_name in file_paths:
+        print(file_name)
+        preprocess_bw(file_name, i)
+        i += 1
 
 def preprocess_bw(file_name, cnt):
+    print("current file: ", file_name)
     bw = pyBigWig.open(file_name)
 
     data_map = {}
 
     bw_size = bw.header()['nBasesCovered']
     j = 0
-    for i in range(1, size_of_bw):
+    for i in range(1, size_of_bw + 1):
         chr = "chr"
         if i == 23:
             chr += "X"
@@ -37,8 +42,6 @@ def preprocess_bw(file_name, cnt):
 
         # Получаем размер хромосомы
         chrom_size = bw.chroms(chr)
-        print("chrom_size ", chrom_size)
-        print("j ", j)
 
         values = bw.values(chr, 0, chrom_size)
 
@@ -48,11 +51,12 @@ def preprocess_bw(file_name, cnt):
 
         j += chrom_size
 
-    # Закрываем файл
     bw.close()
 
     # Сохраняем хеш-таблицу в файл
-    with open("resfoldbigwig/info_%s.txt" % cnt, "w") as file:
+    file_basename = os.path.basename(file_name)
+    output_path = os.path.join(res_folder_path, file_basename.replace(".bw", "_hm.txt"))
+    with open(output_path, "w") as file:
         for key, value in data_map.items():
             file.write(str(key) + "\t" + str(value) + "\n")
 

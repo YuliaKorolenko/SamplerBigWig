@@ -21,7 +21,7 @@ def get_time():
             start_time = time.time()
             for _ in range(0, 1000):
                 start_pos = random.randint(0, 20000000)
-                chr = random.randint(0, 1)
+                chr = random.randint(0, 0)
                 ans = fun(chr, start_pos, WINDOW_SIZE)
         
             res_time = time.time() - start_time
@@ -38,7 +38,7 @@ def get_time():
     plt.plot(sizes, times[2], color="black", label='hash map')
     plt.plot(sizes, times[3], color="#4CC9F0", label='bin search')
     plt.legend()
-    plt.show()
+    plt.savefig('plot.png')
 
 if __name__ == '__main__':
     get_time()

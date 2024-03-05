@@ -1,0 +1,3 @@
+/home/ojpochemy/SamplerBigWig/foldbigwig/interval.all.obs_1.bw
+/home/ojpochemy/SamplerBigWig/foldbigwig/interval.all.obs_2.bw
+/home/ojpochemy/SamplerBigWig/foldbigwig/interval.all.obs_3.bw
