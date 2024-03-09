@@ -67,4 +67,4 @@ def bin_search(positions, cur):
 
 if __name__ == '__main__':
     # 23   3976130   100000
-    print(get_lines(2, 180749, 100))
+    print(get_lines(2, 180749, 10))

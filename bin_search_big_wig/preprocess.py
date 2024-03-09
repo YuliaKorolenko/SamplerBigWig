@@ -25,6 +25,7 @@ def preprocess():
 
     for filename in file_paths:
         if filename.endswith(".bw"):
+            print("current file: ", filename)
             bw_path = os.path.join(filename)
 
             bw = pyBigWig.open(bw_path)
@@ -57,11 +58,12 @@ def preprocess():
             
             
             file_basename = os.path.basename(filename)
-            output_path = os.path.join(output_folder, filename.replace(".bw", "_data"))
+            output_path = os.path.join(output_folder, file_basename.replace(".bw", "_data"))
             np.save(output_path + '_positions.npy', np.array(positions, dtype=np.int64))
             np.save(output_path + '_values.npy', np.array(values_ziped, dtype=np.int64))
             
             bw.close()
+
 
 if __name__ == '__main__':
     preprocess()

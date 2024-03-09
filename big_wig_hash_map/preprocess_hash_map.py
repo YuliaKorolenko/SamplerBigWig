@@ -18,7 +18,6 @@ def prerpocess_all():
             file_paths.append(line.strip())
     i = 0        
     for file_name in file_paths:
-        print(file_name)
         preprocess_bw(file_name, i)
         i += 1
 
